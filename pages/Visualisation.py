@@ -38,7 +38,7 @@ def ncols(i):
     return 2
   else:
     return 3
-if not columns_to_plot:
+if columns_to_plot==[]:
     st.warning("Veuillez sélectionner au moins une colonne.")
 else:
     # Plot based on the number of selected columns
