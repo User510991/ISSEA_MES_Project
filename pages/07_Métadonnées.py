@@ -9,7 +9,7 @@ st.title("Afficher un tableau Excel sur Streamlit")
 
 
     # Charger le fichier Excel avec openpyxl
-workbook = openpyxl.load_workbook("https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Livre%201.xlsx")
+workbook = openpyxl.load_workbook("https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Livre.xlsx")
 
     # Sélectionner la première feuille (ou une feuille spécifique)
 sheet = workbook.active  # Ou sheet = workbook['Nom_de_la_feuille']
