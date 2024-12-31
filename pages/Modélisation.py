@@ -73,9 +73,9 @@ def main():
     #set_background(background_path, opacity=0.3, color="#FF4500")
 
     st.markdown("""<h1 class="animated-title">Base de donnés RDC</h1>""", unsafe_allow_html=True)
-    st.markdown('<h2 class="fade-in-out">Période étude : 1999 - 2023 </h2>', unsafe_allow_html=True)
-    st.markdown('<h2 class="fade-in-out">Soit une serie de 24 ans. </h2>', unsafe_allow_html=True)
-    st.title("Les données présentées sur cette page résultent d'une collecte d'informations à partir de differents rapports de la banque centrale du congo (BCC).")
+    st.markdown('<h2 class="fade-in-out">Période étude : 1991 - 2023 </h2>', unsafe_allow_html=True)
+    #st.markdown('<h2 class="fade-in-out">Soit une serie de 24 ans. </h2>', unsafe_allow_html=True)
+    st.title("Les données proviennenent des sites de la Banque mondiale et de l'Agence internationale de l'énergie (IEA)")
     
 if __name__ == '__main__':
     main()
@@ -103,9 +103,9 @@ def main():
         df = pd.read_excel("https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F%204.xlsx")
         
         # Appliquer le logarithme népérien sur toutes les variables sauf les exceptions
-        exceptions = ["Banque centrale - Taux directeur", "Inflation annuelle moyenne"]
+        loger = ["Imp_renouv", "FBCF","bal_ext_BS ","PIB_hbt"]
         for col in df.columns[1:]:  # Exclure la première colonne (Année)
-            if col not in exceptions:
+            if col in loger:
                 df[col] = np.log(df[col])
 
         # Initialiser les p-values
