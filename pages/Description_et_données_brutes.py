@@ -14,6 +14,7 @@ df = df.set_index('Annee')
 st.title("Statistiques Descriptives")
 
 # Sidebar for table selection
+selected_tables=[]
 selected_tables_raw = st.sidebar.multiselect("Choisir les tables", df.columns)
 reverse_selected_tables =st.sidebar.checkbox("Toutes les variables sauf celles sélectionnées")
 if len(selected_tables_raw):
@@ -28,7 +29,7 @@ if show_all_table:
   selected_tables=df.columns
 show_all_data= st.sidebar.checkbox("Afficher les données brutes")
 # Main content area
-if len(selected_tables_raw):
+if len(selected_tables):
   st.write("### Statistiques descriptives")
   st.write(df[list(selected_tables)].describe())  # Display basic descriptive statistics
 else:
