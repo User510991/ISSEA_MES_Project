@@ -4,9 +4,12 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 
+url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
+
+df = pd.read_csv(url,sep=";",decimal=",")
+df = df.set_index('Annee')
 # Streamlit app starts here
 st.title("Statistiques Descriptives Bivariées")
-
 
 st.write("Aperçu des données :")
 st.dataframe(df.head())
