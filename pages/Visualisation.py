@@ -7,7 +7,7 @@ import plotly.express as px
 # Assuming df is your DataFrame (replace with your actual data loading)
 # ... (Your data loading code from the previous example) ...
 
-url="blob:https://github.com/c0b479f0-156d-49bb-98da-4b13152bb77d"
+url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 
 df = pd.read_csv(url)
 
