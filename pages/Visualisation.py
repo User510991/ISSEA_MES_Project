@@ -75,8 +75,10 @@ if len(selected_columns_raws):
 # Determine columns to display
 if all_columns:
     columns_to_plot = df.columns
-else:
+elif len(selected_columns_raws):
     columns_to_plot = selected_columns
+else:
+    columns_to_plot = selected_columns_raws
 def ncols(i):
   if  i in range(4):
     return 1
