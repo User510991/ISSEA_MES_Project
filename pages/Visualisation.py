@@ -63,8 +63,14 @@ st.write(f"Année de départ sélectionnée : {start_year}")
 st.write(f"Année finale sélectionnée : {end_year}")
 # Sidebar for variable selection
 st.sidebar.header("Sélection des variables")
-selected_columns = st.sidebar.multiselect("Sélectionnez les colonnes à afficher", df.columns, default=list(df.columns))
-all_columns = st.sidebar.checkbox("Afficher toutes les colonnes", value=True)
+selected_columns_raws = st.sidebar.multiselect("Sélectionnez les variables à afficher", df.columns, default=list(df.columns))
+all_columns = st.sidebar.checkbox("Afficher toutes les colonnes", value=True
+reverse_selected_tables =st.sidebar.checkbox("Toutes les variables sauf celles sélectionnées")
+if len(selected_columns_raws):
+  if reverse_selected_tables:
+    selected_columns =[col for col in df.columns if col not in selected_columns_raws]
+  else:
+    selected_columns=selected_columns_raws
 
 # Determine columns to display
 if all_columns:
