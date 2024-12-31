@@ -5,7 +5,7 @@ st.markdown(
     """
     <style>
     body {
-        background-image: url('https://via.placeholder.com/1920x1080'); /* Remplacez par l'URL de votre image */
+        background-image: url('https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/main/Back_ground2.jpg'); /* Remplacez par l'URL de votre image */
         background-size: cover;
         background-attachment: fixed;
         color: white; /* Couleur du texte par défaut */
