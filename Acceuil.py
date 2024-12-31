@@ -75,7 +75,7 @@ with col2:
             <p>Sous la supervision de:</p>
             <ul>
                 <li><strong>M. CHASSEM ...</strong>    
-                <br><em>Ingénieurs Statisticiens Economistes</em>.</li>
+                <br><em>Ingénieur Statisticien Economiste, ...</em>.</li>
             </ul>
         </div>
         """,
