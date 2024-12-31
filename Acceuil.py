@@ -74,7 +74,8 @@ with col2:
         <div class='content'>
             <p>Sous la supervision de:</p>
             <ul>
-                <li><strong>Élément 2</strong>:<em>Description de l'élément 2 avec mise en italique</em>.</li>
+                <li><strong>M. CHASSEM ...</strong>    
+                <br><em>Ingénieurs Statisticiens Economistes</em>.</li>
             </ul>
         </div>
         """,
