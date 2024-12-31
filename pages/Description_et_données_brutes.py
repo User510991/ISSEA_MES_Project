@@ -29,10 +29,10 @@ if show_all_table:
 show_all_data= st.sidebar.checkbox("Afficher les données brutes")
 # Main content area
 if len(selected_tables):
-        st.write("### Statistiques descriptives")
-        st.write(df[list(selected_tables)].describe())  # Display basic descriptive statistics
+  st.write("### Statistiques descriptives")
+  st.write(df[list(selected_tables)].describe())  # Display basic descriptive statistics
 else:
-    st.write("Veuillez sélectionner au moins une colonne pour afficher les statistiques descriptives.")
+  st.write("Veuillez sélectionner au moins une colonne pour afficher les statistiques descriptives.")
 if show_all_data:
-    st.write("### Données brutes")
-    st.write(df[list(selected_tables)])
+  st.write("### Données brutes")
+  st.write(df[list(selected_tables)])
