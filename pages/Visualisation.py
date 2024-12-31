@@ -78,7 +78,7 @@ def ncols(i):
     return 2
   else:
     return 3
-if columns_to_plot:
+if len(columns_to_plot):
     # Plot based on the number of selected columns
     n_cols = ncols(len(columns_to_plot))
     n_rows = (len(columns_to_plot) + n_cols - 1) // n_cols
