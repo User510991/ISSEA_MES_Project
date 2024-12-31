@@ -72,12 +72,12 @@ if all_columns:
 else:
     columns_to_plot = selected_columns
 def ncols(i):
-  if  i in range(3):
+  if  i in range(4):
     return 1
-  elif i in range(3,8):
-    return 2
+  #elif i in range(3,8):
+    #return 2
   else:
-    return 3
+    return 2#3
 if len(columns_to_plot):
     # Plot based on the number of selected columns
     n_cols = ncols(len(columns_to_plot))
