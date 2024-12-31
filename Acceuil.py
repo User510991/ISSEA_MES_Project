@@ -40,8 +40,8 @@ st.markdown(
 )
 
 # Titre et sous-titre
-st.markdown("<div class='title'>Bienvenue sur Mon Application</div>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>Votre plateforme interactive</div>", unsafe_allow_html=True)
+st.markdown("<div class='title'>Application de simulation</div>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>Projet de cours de Modèle à équation simultané</div>", unsafe_allow_html=True)
 
 # Contenu principal avec mise en forme
 st.markdown(
@@ -54,3 +54,30 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown(
+        """
+        <div class='content'>
+            <p>Réalisé par les élèves Ingénieurs Statisticiens Economistes:</p>
+            <ul>
+                <li><strong>DOMETI Kwassi Raphaël</strong></li>
+                <li><strong>JOUBAIDA ALI</strong></li>
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+with col2:
+    st.markdown(
+        """
+        <div class='content'>
+            <p>Sous la supervision de:</p>
+            <ul>
+                <li><strong>Élément 2</strong>:<em>Description de l'élément 2 avec mise en italique</em>.</li>
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    
