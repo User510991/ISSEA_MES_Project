@@ -6,6 +6,10 @@ import plotly.express as px
 
 # Assuming 'df' is your DataFrame (replace with your actual DataFrame)
 # Example DataFrame (replace with your actual data)
+url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
+
+df = pd.read_csv(url,sep=";",decimal=",")
+df = df.set_index('Annee')
 
 st.title("Statistiques Descriptives")
 
