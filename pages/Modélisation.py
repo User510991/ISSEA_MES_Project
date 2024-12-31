@@ -72,7 +72,7 @@ def main():
     #background_path = "C://Users//djetek_user//Desktop//ISE 3//Pierre et Nathan projet//image_modelisation.jpg"
     #set_background(background_path, opacity=0.3, color="#FF4500")
 
-    st.markdown("""<h1 class="animated-title">Base de donnés RDC</h1>""", unsafe_allow_html=True)
+    st.markdown("""<h1 class="animated-title">Base de donnés MAROC</h1>""", unsafe_allow_html=True)
     st.markdown('<h2 class="fade-in-out">Période étude : 1991 - 2023 </h2>', unsafe_allow_html=True)
     #st.markdown('<h2 class="fade-in-out">Soit une serie de 24 ans. </h2>', unsafe_allow_html=True)
     st.title("Les données proviennenent des sites de la Banque mondiale et de l'Agence internationale de l'énergie (IEA)")
