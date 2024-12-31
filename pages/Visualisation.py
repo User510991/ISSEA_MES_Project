@@ -9,7 +9,7 @@ import plotly.express as px
 
 url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 
-df = pd.read_csv(url)
+df = pd.read_csv(url,sep=";",dec=",")
 
 st.title("Visualisation des données")
 
