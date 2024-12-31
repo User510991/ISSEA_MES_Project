@@ -28,7 +28,7 @@ if show_all_table:
   selected_tables=df.columns
 show_all_data= st.sidebar.checkbox("Afficher les données brutes")
 # Main content area
-if len(selected_tables):
+if len(selected_tables_raw):
   st.write("### Statistiques descriptives")
   st.write(df[list(selected_tables)].describe())  # Display basic descriptive statistics
 else:
