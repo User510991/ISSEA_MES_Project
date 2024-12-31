@@ -5,3 +5,7 @@ plotly
 pandas
 numpy
 openpyxl
+os
+base64
+statsmodels
+arch
