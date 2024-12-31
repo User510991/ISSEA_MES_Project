@@ -32,7 +32,7 @@ if len(selected_tables_raw):
   st.write("### Statistiques descriptives")
   st.write(df[list(selected_tables)].describe())  # Display basic descriptive statistics
 else:
-  st.write("Veuillez sélectionner au moins une colonne pour afficher les statistiques descriptives.")
+  st.warning("Veuillez sélectionner au moins une colonne pour afficher les statistiques descriptives.")
 if show_all_data:
   st.write("### Données brutes")
   st.write(df[list(selected_tables)])
