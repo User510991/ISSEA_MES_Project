@@ -5,6 +5,5 @@ plotly
 pandas
 numpy
 openpyxl
-base64
 statsmodels
 arch
