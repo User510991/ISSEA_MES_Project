@@ -74,7 +74,7 @@ with col2:
         <div class='content'>
             <p>Sous la supervision de:</p>
             <ul>
-                <li><strong>M. CHASSEM ...</strong>    
+                <li><strong>M. CHASSEM Narcisse</strong>    
                 <br><em>Ingénieur Statisticien Economiste, ...</em>.</li>
             </ul>
         </div>
