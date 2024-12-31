@@ -100,7 +100,7 @@ def main():
 
     try:
         # Chargement des données
-        df = pd.read_excel("https://1drv.ms/x/c/4ba4eb496042125b/EbPEcGpXJbdDgua-TUm8T9QBhrRN4gaVGzY8yxsj4NUDOw?e=ted9h7")
+        df = pd.read_excel("https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F%204.xlsx")
         
         # Appliquer le logarithme népérien sur toutes les variables sauf les exceptions
         exceptions = ["Banque centrale - Taux directeur", "Inflation annuelle moyenne"]
