@@ -4,7 +4,7 @@ import requests
 from openpyxl import load_workbook
 
 # Titre de l'application Streamlit
-st.title("Afficher un tableau Excel sur Streamlit")
+st.title("Tableau des métadonnées")
 
 # Charger le fichier Excel
 
