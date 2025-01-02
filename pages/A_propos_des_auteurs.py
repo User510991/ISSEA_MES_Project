@@ -60,7 +60,7 @@ def main():
     # Chemins d'accès aux images en ligne
     #background_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/image_congo.jpg"
     Photo_DOMETI = "https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/c92e0224442fa78c518c361ee9a64f3bf562f54b/pages/MAROC_drapeau.jpg"
-    Photo_Ali = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/Image_Nathan.jpg"
+    Photo_Ali = "https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/95b61aa65a21055808fb3bdbe8166a117967962c/pages/Photo_Ali.jpg"
 
     # Définir l'image de fond
     #set_background(background_url, opacity=0.3, color="#000000")
