@@ -58,24 +58,20 @@ def main():
     st.set_page_config(page_title="Visualisation des Données", page_icon="")  # Flocon de neige
 
     # Chemins d'accès aux images en ligne
-    background_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/image_congo.jpg"
+    #background_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/image_congo.jpg"
     ma_photo_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/Ma_photo.jpg"
     pierre_photo_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/Image_Nathan.jpg"
 
     # Définir l'image de fond
-    set_background(background_url, opacity=0.3, color="#000000")
+    #set_background(background_url, opacity=0.3, color="#000000")
 
     # Ajout des images dans l'en-tête
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
     with col1:
-        st.image("https://img.freepik.com/photos-gratuite/drapeau-republique-democratique-du-congo_1401-92.jpg?t=st=1735662475~exp=1735666075~hmac=970eb118a64c6d542d277cd10412aca4deaf441ce824f12ee0c974bd4b60c33a&w=826", use_container_width=True)
-        st.markdown('<p class="caption">Drapeau RDC</p>', unsafe_allow_html=True)
+        st.image("MAROC_drapeau.jpg", use_container_width=True)
+        st.markdown('<p class="caption">Royaume du MAROC</p>', unsafe_allow_html=True)
 
     with col2:
-        st.image("https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/image_bcc.jpg", use_container_width=True)
-        st.markdown('<p class="caption">BCC</p>', unsafe_allow_html=True)
-
-    with col3:
         st.image("https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/Logo_ISSEA.jpeg", use_container_width=True)
         st.markdown('<p class="caption">ISSEA</p>', unsafe_allow_html=True)
 
@@ -87,9 +83,9 @@ def main():
     col1, col2 = st.columns(2)
 
     with col1:
-        display_author(ma_photo_url, "DOMETI Kwassi Raphaël", "rdometi05@gmail")  # Remplacez ici
+        display_author("Photo_DOMETI.jpg", "DOMETI Kwassi Raphaël", "rdometi05@gmail")  # Remplacez ici
     with col2:
-        display_author(pierre_photo_url, "JOUBAIDA Ali", "joubaidaa@gmail.com")  # Remplacez ici
+        display_author("Photo_Ali.jpg", "JOUBAIDA Ali", "joubaidaa@gmail.com")  # Remplacez ici
 
 if __name__ == "__main__":
     main()
