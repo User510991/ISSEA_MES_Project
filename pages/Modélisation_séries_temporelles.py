@@ -218,7 +218,11 @@ def main():
         filtered_df = df[(df['Annee'] >= start_year) & (df['Annee'] <= end_year)].copy()
 
         try:
-            filtered_df[column] = np.log(filtered_df[column])
+            loger = ["Imp_renouv", "FBCF","bal_ext_BS ","PIB_hbt"]
+            if column =="bal_ext_BS ":
+                filtered_df[column] = -np.log(-filtered_df[column])
+            elif column in loger:
+                filtered_df[column] = np.log(filtered_df[column])
             st.write(f"Log appliqué à : {column}")
         except (TypeError, ValueError) as e:
             st.error(f"Erreur logarithme : {e}")
