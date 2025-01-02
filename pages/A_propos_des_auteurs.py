@@ -83,7 +83,7 @@ def main():
     col1, col2 = st.columns(2)
 
     with col1:
-        display_author(Photo_DOMETI, "DOMETI Kwassi Raphaël", "rdometi05@gmail")  # Remplacez ici
+        display_author(Photo_DOMETI, "DOMETI Kwassi Raphaël", "rdometi205@gmail")  # Remplacez ici
     with col2:
         display_author(Photo_Ali, "JOUBAIDA Ali", "joubaidaa@gmail.com")  # Remplacez ici
 
