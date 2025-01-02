@@ -196,8 +196,8 @@ def test_toda_yamamoto(df, var1, var2, max_lags):
 
 def main():
     st.set_page_config(page_title="Visualisation des Données", page_icon="")
-    background_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/image_analyse_donnees.jpg"
-    set_background(background_url, opacity=0.3, color="#000000")
+    #background_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/image_analyse_donnees.jpg"
+    #set_background(background_url, opacity=0.3, color="#000000")
 
     try:
         # Charger la base de données depuis l'URL
