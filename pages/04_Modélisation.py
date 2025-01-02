@@ -104,9 +104,11 @@ def main():
         
         # Appliquer le logarithme népérien sur toutes les variables sauf les exceptions
         loger = ["Imp_renouv", "FBCF","bal_ext_BS ","PIB_hbt"]
-        for col in df.columns[1:]:  # Exclure la première colonne (Année)
-            if col in loger:
+        for col in loger:  # Exclure la première colonne (Année)
+            if col !="bal_ext_BS ":
                 df[col] = np.log(df[col])
+            else:
+                df[col] = -np.log(-df[col])
 
         # Initialiser les p-values
         p_value = None
