@@ -59,8 +59,8 @@ def main():
 
     # Chemins d'accès aux images en ligne
     #background_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/image_congo.jpg"
-    ma_photo_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/Ma_photo.jpg"
-    pierre_photo_url = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/Image_Nathan.jpg"
+    Photo_DOMETI = "https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/c92e0224442fa78c518c361ee9a64f3bf562f54b/pages/MAROC_drapeau.jpg"
+    Photo_Ali = "https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/Image_Nathan.jpg"
 
     # Définir l'image de fond
     #set_background(background_url, opacity=0.3, color="#000000")
@@ -68,7 +68,7 @@ def main():
     # Ajout des images dans l'en-tête
     col1, col2 = st.columns(2)
     with col1:
-        st.image("/MAROC_drapeau.jpg", use_container_width=True)
+        st.image("https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/c92e0224442fa78c518c361ee9a64f3bf562f54b/pages/MAROC_drapeau.jpg", use_container_width=True)
         st.markdown('<p class="caption">Royaume du MAROC</p>', unsafe_allow_html=True)
 
     with col2:
@@ -83,9 +83,9 @@ def main():
     col1, col2 = st.columns(2)
 
     with col1:
-        display_author("/Photo_DOMETI.jpg", "DOMETI Kwassi Raphaël", "rdometi05@gmail")  # Remplacez ici
+        display_author(Photo_DOMETI, "DOMETI Kwassi Raphaël", "rdometi05@gmail")  # Remplacez ici
     with col2:
-        display_author("/Photo_Ali.jpg", "JOUBAIDA Ali", "joubaidaa@gmail.com")  # Remplacez ici
+        display_author(Photo_Ali, "JOUBAIDA Ali", "joubaidaa@gmail.com")  # Remplacez ici
 
 if __name__ == "__main__":
     main()
