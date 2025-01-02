@@ -68,7 +68,7 @@ def main():
     # Ajout des images dans l'en-tête
     col1, col2 = st.columns(2)
     with col1:
-        st.image("MAROC_drapeau.jpg", use_container_width=True)
+        st.image("/MAROC_drapeau.jpg", use_container_width=True)
         st.markdown('<p class="caption">Royaume du MAROC</p>', unsafe_allow_html=True)
 
     with col2:
@@ -83,9 +83,9 @@ def main():
     col1, col2 = st.columns(2)
 
     with col1:
-        display_author("Photo_DOMETI.jpg", "DOMETI Kwassi Raphaël", "rdometi05@gmail")  # Remplacez ici
+        display_author("/Photo_DOMETI.jpg", "DOMETI Kwassi Raphaël", "rdometi05@gmail")  # Remplacez ici
     with col2:
-        display_author("Photo_Ali.jpg", "JOUBAIDA Ali", "joubaidaa@gmail.com")  # Remplacez ici
+        display_author("/Photo_Ali.jpg", "JOUBAIDA Ali", "joubaidaa@gmail.com")  # Remplacez ici
 
 if __name__ == "__main__":
     main()
