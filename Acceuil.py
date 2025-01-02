@@ -1,6 +1,59 @@
 import streamlit as st
 
+
 # Appliquer des styles avec HTML et CSS
+
+def set_background(image_url, opacity=0.5, color="#000000"):
+    """Définit l'image de fond de l'application."""
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url({image_url});
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        .stApp::before {{
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: {color};
+            opacity: {opacity};
+            z-index: -1;
+        }}
+        .stApp h1, .stApp h2 {{
+            color: white !important;
+        }}
+        .animated-title {{
+            font-size: 2.5em;
+            font-weight: bold;
+            animation: text-animation 10s linear infinite;
+            text-shadow: 2px 2px 4px #000000;
+        }}
+        @keyframes text-animation {{
+            0% {{ transform: translateX(-100%); opacity: 0; }}
+            10% {{ transform: translateX(0%); opacity: 1;}}
+            90% {{transform: translateX(0%); opacity: 1;}}
+            100% {{ transform: translateX(100%); opacity: 0; }}
+        }}
+        .fade-in-out {{
+            animation: fade 3s ease-in-out infinite alternate;
+            color: #ADD8E6;
+        }}
+        @keyframes fade {{
+            0% {{ opacity: 0.2; color: #ADD8E6;}}
+            50% {{ opacity: 1; color: #87CEEB; }}
+            100% {{ opacity: 0.2; color: #ADD8E6; }}
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+set_background('https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/main/Back_ground2.jpg', opacity=0.5, color="#000000")
 st.markdown(
     """
     <style>
