@@ -1,6 +1,7 @@
 import streamlit as st
 
-
+st.image("https://raw.githubusercontent.com/Ndobo1997/Projet-MES/main/Logo_ISSEA.jpeg", use_container_width=True)
+st.markdown('<p class="caption">ISSEA</p>', unsafe_allow_html=True)
 # Appliquer des styles avec HTML et CSS
 
 def set_background(image_url, opacity=0.5, color="#000000"):
