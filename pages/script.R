@@ -10,15 +10,20 @@ install_if_missing <- function(pkg) {
     }
 }
 
-# Liste des packages nécessaires
-required_packages <- c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS", 
+install.packages(c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS", 
                    "caschrono", "nortest", "lmtest", "strucchange", "vars", 
                    "dynlm", "tsDyn", "dLagM", "dynamac", "TSstudio", "ARDL", 
                    "TSA", "car", "nardl", "CPAT", "systemfit", "AER", "foreign", 
-                   "xtable", "stargazer", "timeSeries", "Hmisc", "texreg", "forecast")
+                   "xtable", "stargazer", "timeSeries", "Hmisc", "texreg", "forecast"))
+# Liste des packages nécessaires
+#required_packages <- c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS", 
+#                   "caschrono", "nortest", "lmtest", "strucchange", "vars", 
+#                   "dynlm", "tsDyn", "dLagM", "dynamac", "TSstudio", "ARDL", 
+#                   "TSA", "car", "nardl", "CPAT", "systemfit", "AER", "foreign", 
+#                   "xtable", "stargazer", "timeSeries", "Hmisc", "texreg", "forecast")
 
 # Installer tous les packages nécessaires
-sapply(required_packages, install_if_missing)
+#sapply(required_packages, install_if_missing)
 
 # If you're using a specific library for the model, ensure it's loaded. For example:
 # library(randomForest)  # If the model is from randomForest
