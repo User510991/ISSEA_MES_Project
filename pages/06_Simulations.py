@@ -58,9 +58,7 @@ ro.r(f'load("{local_file}")')  # Charge l'objet R contenu dans le fichier
 print("Modèle chargé avec succès.")
 
 
-# Charge l'objet appelé `fit` contenant le modèle
-# Charger le modèle R dans l'environnement
-ro.r(f'load("{local_file}")')  # Charge l'objet R contenu dans le fichier
+# Charge l'objet R contenu dans le fichier
 
 # Streamlit Interface
 st.title("Prédictions Basées sur un Modèle Économétrique R avec Plotly")
