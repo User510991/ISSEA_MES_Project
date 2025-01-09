@@ -1,7 +1,21 @@
 # script.R
 args <- commandArgs(trailingOnly = TRUE)
 
+
 # Load required library
+# Fonction pour installer un package s'il n'est pas installé
+install_if_missing <- function(pkg) {
+    if (!require(pkg, character.only = TRUE)) {
+        install.packages(pkg, repos = "http://cran.us.r-project.org")
+    }
+}
+
+# Liste des packages nécessaires
+required_packages <- c("moments", "dplyr", "ggplot2", "lmtest", "urca", "forecast")
+
+# Installer tous les packages nécessaires
+sapply(required_packages, install_if_missing)
+
 # If you're using a specific library for the model, ensure it's loaded. For example:
 # library(randomForest)  # If the model is from randomForest
 library(moments)
