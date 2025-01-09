@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-
+import subprocess
+import tempfile
 
 url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 
@@ -40,6 +41,18 @@ df_filled = df_new.fillna(method='ffill')
 col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS"]]
 df_t=df_filled[col_names]
 df_t.to_csv('data_new.csv', index=True)
+
+
+
+# Spécifier le chemin du script R
+script_r = 'script.R'  # Nom de votre script R
+
+# Appeler le script R avec les variables en argument
+result = subprocess.run(
+    ['Rscript', script_r],  # Ajoute les arguments à la commande R
+    capture_output=True,  # Capture la sortie
+    text=True  # Retourne la sortie sous forme de texte
+)
 df_predictions_initial= pd.read_csv("predictions_initial.csv")
 df_predictions_modified = pd.read_csv("predictions_modified.csv")
 df_impact = pd.read_csv("impact.csv")
