@@ -6,19 +6,14 @@ args <- commandArgs(trailingOnly = TRUE)
 # library(randomForest)  # If the model is from randomForest
 
 # Step 1: Download and load the model from the URL
-url <- "https://example.com/your_model.rds"  # Replace with actual URL of the model
-temp_model_file <- tempfile(fileext = ".rds")
+url <- "https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/Essaies/model_3sls.RData"  # Replace with actual URL of the model
+temp_model_file <- tempfile(fileext = ".rData")
 download.file(url, temp_model_file)
 model <- readRDS(temp_model_file)
 
-# Step 2: Create initial data (replace this with your actual data)
-data <- data.frame(
-  var1 = c(10, 20, 30),
-  var2 = c(5, 10, 15)
-)
 
 # Step 3: Make initial predictions using the loaded model
-predictions_initial <- predict(model, newdata = data)
+predictions_initial <- predict(model)
 
 # Step 4: Save initial predictions to a CSV file
 write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
