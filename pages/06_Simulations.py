@@ -9,7 +9,7 @@ url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/m
 
 df = pd.read_csv(url,sep=";",decimal=",")
 df = df.set_index('Annee')
-df_new=df.iloc[-1]
+df_new=df.iloc[-1:]
 last_index = df.index[-1]
 liste_exp=[l for l in df.columns if l not in ["PIB_hbt", "CO2","Renouv","Annee"]]
 prediction_period = st.sidebar.slider("Nombre de périodes pour la prédiction", 1, 20, 10)
