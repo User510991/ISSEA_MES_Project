@@ -19,8 +19,17 @@ predictions_initial <- predict(model)
 write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
 
 # Step 5: Modify the data (e.g., change var1 values)
-data_modified <- data
-data_modified$var1 <- c(15, 25, 35)  # Change var1 values
+# Step 1: Specify the URL for the modified data CSV
+url_data <- "https://example.com/modified_data.csv"  # Replace with actual URL
+
+# Step 2: Define a temporary file path to store the downloaded data
+temp_data_file <- tempfile(fileext = ".csv")
+
+# Step 3: Download the modified data CSV file
+download.file(url_data, temp_data_file)
+
+# Step 4: Load the modified data into R
+data_modified <- read.csv(temp_data_file)
 
 # Step 6: Make new predictions with the modified data
 predictions_modified <- predict(model, newdata = data_modified)
