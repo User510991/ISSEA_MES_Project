@@ -7,6 +7,26 @@ import tempfile
 
 url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 
+def add_rows_with_tail_values(df, num_rows):
+    """Adds rows to the DataFrame with the same values as the tail.
+
+    Args:
+        df: The input DataFrame.
+        num_rows: The number of rows to add.
+
+    Returns:
+        A new DataFrame with the added rows.
+    """
+
+    if num_rows <= 0 :
+      return df
+    
+    tail_row = df.tail(1)
+    new_rows = pd.concat([tail_row] * num_rows)
+    return pd.concat([df, new_rows])
+
+
+
 df = pd.read_csv(url,sep=";",decimal=",")
 df = df.set_index('Annee')
 df_new=df.iloc[-1:]
@@ -15,6 +35,10 @@ liste_exp=[l for l in df.columns if l not in ["PIB_hbt", "CO2","Renouv","Annee"]
 prediction_period = st.sidebar.slider("Nombre de périodes pour la prédiction", 1, 20, 10)
 st.sidebar.subheader("Variables Explicatives")
 selected_vars = st.sidebar.multiselect("Sélectionnez les variables à modifier", liste_exp)
+# Example usage
+# Add 3 rows with the same values as the last row of df
+df_extended = add_rows_with_tail_values(df, int(prediction_period))
+df_init=df_extended.iloc[-int(prediction_period):]
 a=1
 for j in selected_vars:
     # Demander combien de nombres l'utilisateur veut entrer
@@ -36,12 +60,18 @@ for j in selected_vars:
 df_new["log_Bext"]=np.log(-df_new["bal_ext_BS "])
 df_new["log_fbcf"]=np.log(df_new["FBCF"])
 df_new["log_Irenouv"]=np.log(df_new["Imp_renouv"])
+df_init["log_Bext"] = np.log(-df_init["bal_ext_BS "])
+df_init["log_fbcf"] = np.log(df_init["FBCF"])
+df_init["log_Irenouv"] = np.log(df_init["Imp_renouv"])
+
+
 # Remplacement des NaN par la dernière valeur valide
 df_filled = df_new.fillna(method='ffill')
-col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS"]]
+col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
+df_a=df_init[col_names]
 df_t=df_filled[col_names]
 df_t.to_csv('data_new.csv', index=True)
-
+df_a.to_csv('data_new_init.csv', index=True)
 
 
 # Spécifier le chemin du script R
