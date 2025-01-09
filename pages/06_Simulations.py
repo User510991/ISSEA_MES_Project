@@ -75,14 +75,16 @@ df_a.to_csv('data_new_init.csv', index=True)
 
 
 # Spécifier le chemin du script R
-script_r = 'script.R'  # Nom de votre script R
+script_r = 'pages/script.R'  # Nom de votre script R
 
 # Appeler le script R avec les variables en argument
-result = subprocess.run(
-    ['Rscript', script_r],  # Ajoute les arguments à la commande R
-    capture_output=True,  # Capture la sortie
-    text=True  # Retourne la sortie sous forme de texte
-)
+try:
+    # Appeler le script R
+    result = subprocess.run(["Rscript", script_r], check=True, capture_output=True, text=True)
+    st.success("Script R exécuté avec succès. Fichier CSV généré.")
+    st.write(f"Fichier sauvegardé : {file_path}")
+except subprocess.CalledProcessError as e:
+    st.error(f"Erreur lors de l'exécution du script R : {e.stderr}")
 print(result)
 df_predictions_initial= pd.read_csv("predictions_initial.csv")
 df_predictions_modified = pd.read_csv("predictions_modified.csv")
