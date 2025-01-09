@@ -11,7 +11,11 @@ install_if_missing <- function(pkg) {
 }
 
 # Liste des packages nécessaires
-required_packages <- c("moments", "dplyr", "ggplot2", "lmtest", "urca", "forecast")
+required_packages <- c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS", 
+                   "caschrono", "nortest", "lmtest", "strucchange", "vars", 
+                   "dynlm", "tsDyn", "dLagM", "dynamac", "TSstudio", "ARDL", 
+                   "TSA", "car", "nardl", "CPAT", "systemfit", "AER", "foreign", 
+                   "xtable", "stargazer", "timeSeries", "Hmisc", "texreg", "forecast")
 
 # Installer tous les packages nécessaires
 sapply(required_packages, install_if_missing)
