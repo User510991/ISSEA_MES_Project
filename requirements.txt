@@ -9,3 +9,4 @@ statsmodels
 arch
 matplotlib
 networkx
+rpy2
