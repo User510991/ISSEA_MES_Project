@@ -33,7 +33,7 @@ for j in selected_vars:
             df_new.loc[last_index+i+1,j]=np.nan
         a=0
     
-df_new["log_Bext"]=np.log(-df_new["bal_ext_BS"])
+df_new["log_Bext"]=np.log(-df_new["bal_ext_BS "])
 df_new["log_fbcf"]=np.log(df_new["FBCF"])
 df_new["log_Irenouv"]=np.log(df_new["Imp_renouv"])
 # Remplacement des NaN par la dernière valeur valide
