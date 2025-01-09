@@ -6,7 +6,7 @@ args <- commandArgs(trailingOnly = TRUE)
 # Fonction pour installer un package s'il n'est pas installé
 install_if_missing <- function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
-        install.packages(pkg, repos = "http://cran.us.r-project.org")
+        install.packages(pkg)
     }
 }
 
