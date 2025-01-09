@@ -4,6 +4,20 @@ import numpy as np
 import plotly.graph_objects as go
 import subprocess
 import tempfile
+import rpy2.robjects as ro
+
+# Définir le script R pour installer les packages nécessaires
+install_r_packages = """
+install.packages("moments", repos='http://cran.us.r-project.org')
+install.packages("urca", repos='http://cran.us.r-project.org')
+install.packages("readxl", repos='http://cran.us.r-project.org')
+install.packages("tseries", repos='http://cran.us.r-project.org')
+install.packages("ggplot2", repos='http://cran.us.r-project.org')
+install.packages("forecast", repos='http://cran.us.r-project.org')
+"""
+
+# Exécuter le script R pour installer les packages
+ro.r(install_r_packages)
 
 url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 
