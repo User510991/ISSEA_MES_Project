@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
+
 url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 
 df = pd.read_csv(url,sep=";",decimal=",")
@@ -42,3 +43,83 @@ df_t.to_csv('data_new.csv', index=True)
 df_predictions_initial= pd.read_csv("predictions_initial.csv")
 df_predictions_modified = pd.read_csv("predictions_modified.csv")
 df_impact = pd.read_csv("impact.csv")
+
+# Exponentier log_pib_hab pour obtenir pib/hab
+df_predictions_initial['pib_hab'] = np.exp(df_predictions_initial['log_pib_hab'])
+df_predictions_modified['pib_hab'] = np.exp(df_predictions_modified['log_pib_hab'])
+
+# Fonction pour tracer les graphiques avec Plotly
+def plot_predictions(data, title, variable, confidence_lower, confidence_upper):
+    fig = go.Figure()
+
+    # Ligne de prédiction
+    fig.add_trace(go.Scatter(
+        x=data['Date'], 
+        y=data[variable],
+        mode='lines',
+        name='Prédiction',
+        line=dict(color='blue')
+    ))
+
+    # Bande d'incertitude
+    fig.add_trace(go.Scatter(
+        x=pd.concat([data['Date'], data['Date'][::-1]]),
+        y=pd.concat([data[confidence_upper], data[confidence_lower][::-1]]),
+        fill='toself',
+        fillcolor='rgba(0, 0, 255, 0.2)',
+        line=dict(color='rgba(255,255,255,0)'),
+        hoverinfo="skip",
+        name='Intervalle de confiance'
+    ))
+
+    # Mise en forme du graphique
+    fig.update_layout(
+        title=title,
+        xaxis_title="Date",
+        yaxis_title=variable,
+        legend_title="Légende",
+        template="plotly_white"
+    )
+
+    return fig
+
+# Interface Streamlit
+st.title("Visualisation des prédictions 3SLS")
+
+# Options pour sélectionner l'équation
+equation = st.selectbox("Choisissez l'équation à visualiser :", ["PIB/hab", "CO2", "Renouv"])
+
+# Filtrer et afficher les données en fonction de l'équation sélectionnée
+if equation == "PIB/hab":
+    st.subheader("Prédictions pour PIB/hab")
+    fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - PIB/hab", 
+                                    'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
+    st.plotly_chart(fig_initial, use_container_width=True)
+
+    fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - PIB/hab", 
+                                     'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
+    st.plotly_chart(fig_modified, use_container_width=True)
+
+elif equation == "CO2":
+    st.subheader("Prédictions pour CO2")
+    fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - CO2", 
+                                    'Co2', 'Co2_lower', 'Co2_upper')
+    st.plotly_chart(fig_initial, use_container_width=True)
+
+    fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - CO2", 
+                                     'Co2', 'Co2_lower', 'Co2_upper')
+    st.plotly_chart(fig_modified, use_container_width=True)
+
+elif equation == "Renouv":
+    st.subheader("Prédictions pour Renouv")
+    fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - Renouv", 
+                                    'Renouv', 'Renouv_lower', 'Renouv_upper')
+    st.plotly_chart(fig_initial, use_container_width=True)
+
+    fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - Renouv", 
+                                     'Renouv', 'Renouv_lower', 'Renouv_upper')
+    st.plotly_chart(fig_modified, use_container_width=True)
+
+# Afficher l'impact
+st.subheader("Impact des prédictions")
+st.dataframe(df_impact)
