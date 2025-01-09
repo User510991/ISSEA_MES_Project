@@ -1,6 +1,6 @@
 # script.R
 args <- commandArgs(trailingOnly = TRUE)
-
+x <- as.numeric(args[1])
 # Load required library
 # If you're using a specific library for the model, ensure it's loaded. For example:
 # library(randomForest)  # If the model is from randomForest
@@ -13,7 +13,7 @@ model <- readRDS(temp_model_file)
 
 
 # Step 3: Make initial predictions using the loaded model
-predictions_initial <- predict(model)
+predictions_initial <- predict(model, interval = "confidence", n.ahead = x)
 
 # Step 4: Save initial predictions to a CSV file
 write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
@@ -32,7 +32,7 @@ download.file(url_data, temp_data_file)
 data_modified <- read.csv(temp_data_file)
 
 # Step 6: Make new predictions with the modified data
-predictions_modified <- predict(model, newdata = data_modified)
+predictions_modified <- predict(model, newdata = data_modified, interval = "confidence", n.ahead = 10)
 
 # Step 7: Save modified predictions to a CSV file
 write.csv(predictions_modified, "predictions_modified.csv", row.names = FALSE)
