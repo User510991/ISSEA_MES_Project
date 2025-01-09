@@ -8,12 +8,11 @@ import rpy2.robjects as ro
 
 # Définir le script R pour installer les packages nécessaires
 install_r_packages = """
-install.packages("moments", repos='http://cran.us.r-project.org')
-install.packages("urca", repos='http://cran.us.r-project.org')
-install.packages("readxl", repos='http://cran.us.r-project.org')
-install.packages("tseries", repos='http://cran.us.r-project.org')
-install.packages("ggplot2", repos='http://cran.us.r-project.org')
-install.packages("forecast", repos='http://cran.us.r-project.org')
+install.packages(c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS", 
+                   "caschrono", "nortest", "lmtest", "strucchange", "vars", 
+                   "dynlm", "tsDyn", "dLagM", "dynamac", "TSstudio", "ARDL", 
+                   "TSA", "car", "nardl", "CPAT", "systemfit", "AER", "foreign", 
+                   "xtable", "stargazer", "timeSeries", "Hmisc", "texreg", "forecast"))
 """
 
 # Exécuter le script R pour installer les packages
