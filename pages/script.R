@@ -4,7 +4,14 @@ x <- as.numeric(args[1])
 # Load required library
 # If you're using a specific library for the model, ensure it's loaded. For example:
 # library(randomForest)  # If the model is from randomForest
+# URL du fichier CSV
+file_url <- "https://example.com/votre_fichier.csv"
 
+# Lire les données CSV à partir de l'URL
+data <- read.csv2(url(file_url))
+
+# Afficher les premières lignes des données pour vérifier le contenu
+head(data)
 # Step 1: Download and load the model from the URL
 url <- "https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/Essaies/model_3sls.RData"  # Replace with actual URL of the model
 temp_model_file <- tempfile(fileext = ".rData")
@@ -13,7 +20,7 @@ model <- readRDS(temp_model_file)
 
 
 # Step 3: Make initial predictions using the loaded model
-predictions_initial <- predict(model, interval = "confidence", n.ahead = x)
+predictions_initial <- predict(model, interval = "confidence")
 
 # Step 4: Save initial predictions to a CSV file
 write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
@@ -32,7 +39,7 @@ download.file(url_data, temp_data_file)
 data_modified <- read.csv(temp_data_file)
 
 # Step 6: Make new predictions with the modified data
-predictions_modified <- predict(model, newdata = data_modified, interval = "confidence", n.ahead = 10)
+predictions_modified <- predict(model, newdata = data_modified, interval = "confidence")
 
 # Step 7: Save modified predictions to a CSV file
 write.csv(predictions_modified, "predictions_modified.csv", row.names = FALSE)
