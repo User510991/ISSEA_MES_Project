@@ -18,7 +18,7 @@ selected_vars = st.sidebar.multiselect("Sélectionnez les variables à modifier"
 a=1
 for j in selected_vars:
     # Demander combien de nombres l'utilisateur veut entrer
-    num_entries = st.number_input("Sur combien d'années portent vos renseignement ?", min_value=0, max_value=int(prediction_period), value=3)
+    num_entries = st.number_input("Sur combien d'années portent vos renseignement ?", min_value=0, max_value=int(prediction_period), value=0)
     # Liste pour stocker les nombres
     numbers = []
     # Demander à l'utilisateur d'entrer les nombres un par un
