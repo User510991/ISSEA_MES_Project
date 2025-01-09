@@ -1,17 +1,46 @@
 # script.R
 args <- commandArgs(trailingOnly = TRUE)
-x <- as.numeric(args[1])
+
 # Load required library
 # If you're using a specific library for the model, ensure it's loaded. For example:
 # library(randomForest)  # If the model is from randomForest
-# URL du fichier CSV
-file_url <- "https://example.com/votre_fichier.csv"
+library(moments)
+library(urca)
+library(readxl)
+library(tseries)
+library(ggplot2)
+library(FinTS)
+library(caschrono)
+library(nortest)
+library(lmtest)
+library(strucchange)
+library(vars)
+library(dynlm)
+library(tsDyn)
+library(dLagM)
+library(dynamac)
+library(TSstudio)  
+library(ARDL)
+library(TSA)   
+library(car)
+library(nardl)
+library(CPAT)   
+library(systemfit)
+library(AER)
+library(foreign)
+library(vars)
+library(xtable)
+library(stargazer)
+library(timeSeries)
+library(Hmisc)
+library(texreg)   
+library(tsDyn)
+library(dynamac)
+library(forecast)
 
-# Lire les données CSV à partir de l'URL
-data <- read.csv2(url(file_url))
 
-# Afficher les premières lignes des données pour vérifier le contenu
-head(data)
+
+
 # Step 1: Download and load the model from the URL
 url <- "https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/Essaies/model_3sls.RData"  # Replace with actual URL of the model
 temp_model_file <- tempfile(fileext = ".rData")
@@ -20,23 +49,13 @@ model <- readRDS(temp_model_file)
 
 
 # Step 3: Make initial predictions using the loaded model
-predictions_initial <- predict(model, interval = "confidence")
+predictions_initial <- predict(model,interval = "confidence")
 
 # Step 4: Save initial predictions to a CSV file
 write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
 
-# Step 5: Modify the data (e.g., change var1 values)
-# Step 1: Specify the URL for the modified data CSV
-url_data <- "https://example.com/modified_data.csv"  # Replace with actual URL
 
-# Step 2: Define a temporary file path to store the downloaded data
-temp_data_file <- tempfile(fileext = ".csv")
-
-# Step 3: Download the modified data CSV file
-download.file(url_data, temp_data_file)
-
-# Step 4: Load the modified data into R
-data_modified <- read.csv(temp_data_file)
+data_modified <- read.csv('data_new.csv')
 
 # Step 6: Make new predictions with the modified data
 predictions_modified <- predict(model, newdata = data_modified, interval = "confidence")
