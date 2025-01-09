@@ -36,7 +36,6 @@ predictions_modified <- predict(model, newdata = data_modified, interval = "conf
 
 # Step 7: Save modified predictions to a CSV file
 write.csv(predictions_modified, "predictions_modified.csv", row.names = FALSE)
-
-# Print messages to confirm
-cat("Initial predictions saved to predictions_initial.csv\n")
-cat("Modified predictions saved to predictions_modified.csv\n")
+# 6. Calcul de l'impact (différence entre les prédictions initiales et modifiées)
+impact <- predictions_modified - predictions_initial
+write.csv(impact, "impact.csv", row.names = FALSE)
