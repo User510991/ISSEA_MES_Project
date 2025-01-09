@@ -40,3 +40,6 @@ df_filled = df_new.fillna(method='ffill')
 col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS"]]
 df_t=df_filled[col_names]
 df_t.to_csv('data_new.csv', index=True)
+df_predictions_initial= pd.read_csv("predictions_initial.csv")
+df_predictions_modified = pd.read_csv("predictions_modified.csv")
+df_impact = pd.read_csv("impact.csv")
