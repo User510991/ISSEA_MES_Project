@@ -6,16 +6,13 @@ import rpy2.robjects as ro
 from rpy2.robjects.packages import importr
 from rpy2.robjects import pandas2ri
 
+
 # Activer la conversion entre pandas et R
 pandas2ri.activate()
 
 # Charger les bibliothèques R nécessaires
 base = importr("base")
 utils = importr("utils")
-
-# Streamlit Interface
-st.title("Prédictions Basées sur un Modèle Économétrique R avec Plotly")
-st.sidebar.title("Paramètres")
 
 # Fonction pour installer un package R
 def install_r_package(package_name):
@@ -64,6 +61,11 @@ print("Modèle chargé avec succès.")
 # Charge l'objet appelé `fit` contenant le modèle
 # Charger le modèle R dans l'environnement
 ro.r(f'load("{local_file}")')  # Charge l'objet R contenu dans le fichier
+
+# Streamlit Interface
+st.title("Prédictions Basées sur un Modèle Économétrique R avec Plotly")
+st.sidebar.title("Paramètres")
+
 model_loaded=True
 # Charger le modèle R
 if model_loaded:
