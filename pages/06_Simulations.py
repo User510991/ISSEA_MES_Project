@@ -53,6 +53,7 @@ result = subprocess.run(
     capture_output=True,  # Capture la sortie
     text=True  # Retourne la sortie sous forme de texte
 )
+print(result)
 df_predictions_initial= pd.read_csv("predictions_initial.csv")
 df_predictions_modified = pd.read_csv("predictions_modified.csv")
 df_impact = pd.read_csv("impact.csv")
