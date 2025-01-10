@@ -155,10 +155,10 @@ if selected_vars:
     
     # Filtrer et afficher les données en fonction de l'équation sélectionnée
     if equation == "PIB/hab":
-        st.subheader("Prédictions pour PIB/hab")
-        fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - PIB/hab", 
+      st.subheader("Prédictions pour PIB/hab")
+      fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - PIB/hab", 
                                         'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
-        st.plotly_chart(fig_initial, use_container_width=True)
+      st.plotly_chart(fig_initial, use_container_width=True)
   
       fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - PIB/hab", 
                                        'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
