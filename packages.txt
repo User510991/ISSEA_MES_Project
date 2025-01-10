@@ -1,7 +1,8 @@
 r-base
 r-base-dev
-r-base
-r-base-dev
+libcurl4-openssl-dev
+libssl-dev
+libxml2-dev
 r-cran-moments
 r-cran-urca
 r-cran-readxl
