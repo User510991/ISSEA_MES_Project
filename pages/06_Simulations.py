@@ -18,7 +18,6 @@ install.packages(c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS",
 # Exécuter le script R pour installer les packages
 #ro.r(install_r_packages)
 
-url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 def plot_predictions(data, title, variable, confidence_lower, confidence_upper):
     fig = go.Figure()
 
@@ -71,8 +70,7 @@ def add_rows_with_tail_values(df, num_rows):
     new_rows = pd.concat([tail_row] * num_rows)
     return pd.concat([df, new_rows])
 
-
-
+url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 df = pd.read_csv(url,sep=";",decimal=",")
 df = df.set_index('Annee')
 df_new=df.iloc[-1:]
