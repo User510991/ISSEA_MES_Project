@@ -19,95 +19,6 @@ install.packages(c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS",
 ro.r(install_r_packages)
 
 url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
-
-def add_rows_with_tail_values(df, num_rows):
-    """Adds rows to the DataFrame with the same values as the tail.
-
-    Args:
-        df: The input DataFrame.
-        num_rows: The number of rows to add.
-
-    Returns:
-        A new DataFrame with the added rows.
-    """
-
-    if num_rows <= 0 :
-      return df
-    
-    tail_row = df.tail(1)
-    new_rows = pd.concat([tail_row] * num_rows)
-    return pd.concat([df, new_rows])
-
-
-
-df = pd.read_csv(url,sep=";",decimal=",")
-df = df.set_index('Annee')
-df_new=df.iloc[-1:]
-last_index = df.index[-1]
-liste_exp=[l for l in df.columns if l not in ["PIB_hbt", "CO2","Renouv","Annee"]]
-prediction_period = st.sidebar.slider("Nombre de périodes pour la prédiction", 1, 20, 10)
-st.sidebar.subheader("Variables Explicatives")
-selected_vars = st.sidebar.multiselect("Sélectionnez les variables à modifier", liste_exp)
-# Example usage
-# Add 3 rows with the same values as the last row of df
-df_extended = add_rows_with_tail_values(df, int(prediction_period))
-df_init=df_extended.iloc[-int(prediction_period):]
-a=1
-for j in selected_vars:
-    # Demander combien de nombres l'utilisateur veut entrer
-    num_entries = st.number_input("Sur combien d'années portent vos renseignement ?", min_value=0, max_value=int(prediction_period), value=0)
-    # Liste pour stocker les nombres
-    numbers = []
-    # Demander à l'utilisateur d'entrer les nombres un par un
-    for i in range(num_entries):
-        number = st.number_input(f"Entrez le nombre {i+1}", key=f"number_{i}")
-        df_new.loc[last_index+i,j]=number
-        #if j in ["FBCF","Imp_renouv"]:
-        #elif j=="bal_ext_BS":
-        numbers.append(number)
-    if a==1:
-        for i in range(num_entries,prediction_period):
-            df_new.loc[last_index+i+1,j]=np.nan
-        a=0
-    
-df_new["log_Bext"]=np.log(-df_new["bal_ext_BS "])
-df_new["log_fbcf"]=np.log(df_new["FBCF"])
-df_new["log_Irenouv"]=np.log(df_new["Imp_renouv"])
-df_init["log_Bext"] = np.log(-df_init["bal_ext_BS "])
-df_init["log_fbcf"] = np.log(df_init["FBCF"])
-df_init["log_Irenouv"] = np.log(df_init["Imp_renouv"])
-
-
-# Remplacement des NaN par la dernière valeur valide
-df_filled = df_new.fillna(method='ffill')
-col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
-df_a=df_init[col_names]
-df_t=df_filled[col_names]
-df_t.to_csv('data_new.csv', index=True)
-df_a.to_csv('data_new_init.csv', index=True)
-
-
-# Spécifier le chemin du script R
-script_r = 'pages/script.R'  # Nom de votre script R
-
-# Appeler le script R avec les variables en argument
-try:
-    # Appeler le script R
-    result = subprocess.run(["Rscript", script_r], check=True, capture_output=True, text=True)
-    st.success("Script R exécuté avec succès. Fichier CSV généré.")
-    st.write(f"Fichier sauvegardé : {file_path}")
-except subprocess.CalledProcessError as e:
-    st.error(f"Erreur lors de l'exécution du script R : {e.stderr}")
-print(result)
-df_predictions_initial= pd.read_csv("predictions_initial.csv")
-df_predictions_modified = pd.read_csv("predictions_modified.csv")
-df_impact = pd.read_csv("impact.csv")
-
-# Exponentier log_pib_hab pour obtenir pib/hab
-df_predictions_initial['pib_hab'] = np.exp(df_predictions_initial['log_pib_hab'])
-df_predictions_modified['pib_hab'] = np.exp(df_predictions_modified['log_pib_hab'])
-
-# Fonction pour tracer les graphiques avec Plotly
 def plot_predictions(data, title, variable, confidence_lower, confidence_upper):
     fig = go.Figure()
 
@@ -142,42 +53,136 @@ def plot_predictions(data, title, variable, confidence_lower, confidence_upper):
 
     return fig
 
-# Interface Streamlit
-st.title("Visualisation des prédictions 3SLS")
+def add_rows_with_tail_values(df, num_rows):
+    """Adds rows to the DataFrame with the same values as the tail.
 
-# Options pour sélectionner l'équation
-equation = st.selectbox("Choisissez l'équation à visualiser :", ["PIB/hab", "CO2", "Renouv"])
+    Args:
+        df: The input DataFrame.
+        num_rows: The number of rows to add.
 
-# Filtrer et afficher les données en fonction de l'équation sélectionnée
-if equation == "PIB/hab":
-    st.subheader("Prédictions pour PIB/hab")
-    fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - PIB/hab", 
-                                    'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
-    st.plotly_chart(fig_initial, use_container_width=True)
+    Returns:
+        A new DataFrame with the added rows.
+    """
 
-    fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - PIB/hab", 
-                                     'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
-    st.plotly_chart(fig_modified, use_container_width=True)
+    if num_rows <= 0 :
+      return df
+    
+    tail_row = df.tail(1)
+    new_rows = pd.concat([tail_row] * num_rows)
+    return pd.concat([df, new_rows])
 
-elif equation == "CO2":
-    st.subheader("Prédictions pour CO2")
-    fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - CO2", 
-                                    'Co2', 'Co2_lower', 'Co2_upper')
-    st.plotly_chart(fig_initial, use_container_width=True)
 
-    fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - CO2", 
-                                     'Co2', 'Co2_lower', 'Co2_upper')
-    st.plotly_chart(fig_modified, use_container_width=True)
 
-elif equation == "Renouv":
-    st.subheader("Prédictions pour Renouv")
-    fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - Renouv", 
-                                    'Renouv', 'Renouv_lower', 'Renouv_upper')
-    st.plotly_chart(fig_initial, use_container_width=True)
-
-    fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - Renouv", 
-                                     'Renouv', 'Renouv_lower', 'Renouv_upper')
-    st.plotly_chart(fig_modified, use_container_width=True)
+df = pd.read_csv(url,sep=";",decimal=",")
+df = df.set_index('Annee')
+df_new=df.iloc[-1:]
+last_index = df.index[-1]
+liste_exp=[l for l in df.columns if l not in ["PIB_hbt", "CO2","Renouv","Annee"]]
+prediction_period = st.sidebar.slider("Nombre de périodes pour la prédiction", 1, 20, 10)
+st.sidebar.subheader("Variables Explicatives")
+selected_vars = st.sidebar.multiselect("Sélectionnez les variables à modifier", liste_exp)
+# Example usage
+# Add 3 rows with the same values as the last row of df
+df_extended = add_rows_with_tail_values(df, int(prediction_period))
+df_init=df_extended.iloc[-int(prediction_period):]
+a=1
+if selected_vars:
+  for j in selected_vars:
+      # Demander combien de nombres l'utilisateur veut entrer
+      num_entries = st.number_input("Sur combien d'années portent vos renseignement ?", min_value=0, max_value=int(prediction_period), value=0)
+      # Liste pour stocker les nombres
+      numbers = []
+      # Demander à l'utilisateur d'entrer les nombres un par un
+      for i in range(num_entries):
+          number = st.number_input(f"Entrez le nombre {i+1}", key=f"number_{i}")
+          df_new.loc[last_index+i,j]=number
+          #if j in ["FBCF","Imp_renouv"]:
+          #elif j=="bal_ext_BS":
+          numbers.append(number)
+      if a==1:
+          for i in range(num_entries,prediction_period):
+              df_new.loc[last_index+i+1,j]=np.nan
+          a=0
+      
+  df_new["log_Bext"]=np.log(-df_new["bal_ext_BS "])
+  df_new["log_fbcf"]=np.log(df_new["FBCF"])
+  df_new["log_Irenouv"]=np.log(df_new["Imp_renouv"])
+  df_init["log_Bext"] = np.log(-df_init["bal_ext_BS "])
+  df_init["log_fbcf"] = np.log(df_init["FBCF"])
+  df_init["log_Irenouv"] = np.log(df_init["Imp_renouv"])
+  
+  
+  # Remplacement des NaN par la dernière valeur valide
+  df_filled = df_new.fillna(method='ffill')
+  col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
+  df_a=df_init[col_names]
+  df_t=df_filled[col_names]
+  df_t.to_csv('data_new.csv', index=True)
+  df_a.to_csv('data_new_init.csv', index=True)
+  
+  
+  # Spécifier le chemin du script R
+  script_r = 'pages/script.R'  # Nom de votre script R
+  a=0
+  # Appeler le script R avec les variables en argument
+  try:
+      # Appeler le script R
+      result = subprocess.run(["Rscript", script_r], check=True, capture_output=True, text=True)
+      st.success("Script R exécuté avec succès. Fichier CSV généré.")
+      a=1
+      st.write(f"Fichier sauvegardé : {file_path}")
+  except subprocess.CalledProcessError as e:
+      st.error(f"Erreur lors de l'exécution du script R : {e.stderr}")
+      a=0
+  if a:
+    print(result)
+    df_predictions_initial= pd.read_csv("predictions_initial.csv")
+    df_predictions_modified = pd.read_csv("predictions_modified.csv")
+    df_impact = pd.read_csv("impact.csv")
+    
+    # Exponentier log_pib_hab pour obtenir pib/hab
+    df_predictions_initial['pib_hab'] = np.exp(df_predictions_initial['log_pib_hab'])
+    df_predictions_modified['pib_hab'] = np.exp(df_predictions_modified['log_pib_hab'])
+    
+    # Fonction pour tracer les graphiques avec Plotly
+  
+    
+    # Interface Streamlit
+    st.title("Visualisation des prédictions 3SLS")
+    
+    # Options pour sélectionner l'équation
+    equation = st.selectbox("Choisissez l'équation à visualiser :", ["PIB/hab", "CO2", "Renouv"])
+    
+    # Filtrer et afficher les données en fonction de l'équation sélectionnée
+    if equation == "PIB/hab":
+        st.subheader("Prédictions pour PIB/hab")
+        fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - PIB/hab", 
+                                        'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
+        st.plotly_chart(fig_initial, use_container_width=True)
+  
+      fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - PIB/hab", 
+                                       'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
+      st.plotly_chart(fig_modified, use_container_width=True)
+  
+  elif equation == "CO2":
+      st.subheader("Prédictions pour CO2")
+      fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - CO2", 
+                                      'Co2', 'Co2_lower', 'Co2_upper')
+      st.plotly_chart(fig_initial, use_container_width=True)
+  
+      fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - CO2", 
+                                       'Co2', 'Co2_lower', 'Co2_upper')
+      st.plotly_chart(fig_modified, use_container_width=True)
+  
+  elif equation == "Renouv":
+      st.subheader("Prédictions pour Renouv")
+      fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - Renouv", 
+                                      'Renouv', 'Renouv_lower', 'Renouv_upper')
+      st.plotly_chart(fig_initial, use_container_width=True)
+  
+      fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - Renouv", 
+                                       'Renouv', 'Renouv_lower', 'Renouv_upper')
+      st.plotly_chart(fig_modified, use_container_width=True)
 
 # Afficher l'impact
 st.subheader("Impact des prédictions")
