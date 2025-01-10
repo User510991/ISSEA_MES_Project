@@ -36,7 +36,7 @@ load(temp_model_file)
 data_init <- read.csv('data_new_init.csv')
 
 # Step 3: Make initial predictions using the loaded model
-predictions_initial <- predict(modeleTCD,newdata = data_init,interval = "confidence")
+predictions_initial <- predict(modeleTCD1,newdata = data_init,interval = "confidence")
 
 # Step 4: Save initial predictions to a CSV file
 write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
