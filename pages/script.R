@@ -30,12 +30,12 @@ install_if_missing <- function(pkg) {
 url <- "https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/Essaies/model_3sls.RData"  # Replace with actual URL of the model
 temp_model_file <- tempfile(fileext = ".RData")
 download.file(url, temp_model_file)
-model <- load(temp_model_file)
+load(temp_model_file)
 
 data_init <- read.csv('data_new_init.csv')
 
 # Step 3: Make initial predictions using the loaded model
-predictions_initial <- predict(model,newdata = data_init,interval = "confidence")
+predictions_initial <- predict(modeleTCD,newdata = data_init,interval = "confidence")
 
 # Step 4: Save initial predictions to a CSV file
 write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
@@ -44,7 +44,7 @@ write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
 data_modified <- read.csv('data_new.csv')
 
 # Step 6: Make new predictions with the modified data
-predictions_modified <- predict(model, newdata = data_modified, interval = "confidence")
+predictions_modified <- predict(modeleTCD, newdata = data_modified, interval = "confidence")
 
 # Step 7: Save modified predictions to a CSV file
 write.csv(predictions_modified, "predictions_modified.csv", row.names = FALSE)
