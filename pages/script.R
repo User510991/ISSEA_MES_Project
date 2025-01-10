@@ -45,7 +45,7 @@ write.csv(predictions_initial, "predictions_initial.csv", row.names = FALSE)
 data_modified <- read.csv('data_new.csv')
 
 # Step 6: Make new predictions with the modified data
-predictions_modified <- predict(modeleTCD, newdata = data_modified, interval = "confidence")
+predictions_modified <- predict(modeleTCD1, newdata = data_modified, interval = "confidence")
 
 # Step 7: Save modified predictions to a CSV file
 write.csv(predictions_modified, "predictions_modified.csv", row.names = FALSE)
