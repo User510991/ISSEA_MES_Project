@@ -184,6 +184,6 @@ if selected_vars:
                                        'Renouv', 'Renouv_lower', 'Renouv_upper')
       st.plotly_chart(fig_modified, use_container_width=True)
 
-# Afficher l'impact
-st.subheader("Impact des prédictions")
-st.dataframe(df_impact)
+  # Afficher l'impact
+  st.subheader("Impact des prédictions")
+  st.dataframe(df_impact)
