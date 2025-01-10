@@ -16,7 +16,7 @@ install.packages(c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS",
 """
 
 # Exécuter le script R pour installer les packages
-ro.r(install_r_packages)
+#ro.r(install_r_packages)
 
 url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
 def plot_predictions(data, title, variable, confidence_lower, confidence_upper):
