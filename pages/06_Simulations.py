@@ -152,35 +152,36 @@ if selected_vars:
     equation = st.selectbox("Choisissez l'équation à visualiser :", ["PIB/hab", "CO2", "Renouv"])
     
     # Filtrer et afficher les données en fonction de l'équation sélectionnée
-    if equation == "PIB/hab":
-      st.subheader("Prédictions pour PIB/hab")
-      fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - PIB/hab", 
-                                        'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
-      st.plotly_chart(fig_initial, use_container_width=True)
-  
-      fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - PIB/hab", 
-                                       'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
-      st.plotly_chart(fig_modified, use_container_width=True)
-  
-    elif equation == "CO2":
-        st.subheader("Prédictions pour CO2")
-        fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - CO2", 
-                                        'Co2', 'Co2_lower', 'Co2_upper')
+    if equation:
+      if equation == "PIB/hab":
+        st.subheader("Prédictions pour PIB/hab")
+        fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - PIB/hab", 
+                                          'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
         st.plotly_chart(fig_initial, use_container_width=True)
     
-        fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - CO2", 
-                                         'Co2', 'Co2_lower', 'Co2_upper')
+        fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - PIB/hab", 
+                                         'pib_hab', 'pib_hab_lower', 'pib_hab_upper')
         st.plotly_chart(fig_modified, use_container_width=True)
     
-    elif equation == "Renouv":
-        st.subheader("Prédictions pour Renouv")
-        fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - Renouv", 
-                                        'Renouv', 'Renouv_lower', 'Renouv_upper')
-        st.plotly_chart(fig_initial, use_container_width=True)
-    
-        fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - Renouv", 
-                                         'Renouv', 'Renouv_lower', 'Renouv_upper')
-        st.plotly_chart(fig_modified, use_container_width=True)
+      elif equation == "CO2":
+          st.subheader("Prédictions pour CO2")
+          fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - CO2", 
+                                          'Co2', 'Co2_lower', 'Co2_upper')
+          st.plotly_chart(fig_initial, use_container_width=True)
+      
+          fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - CO2", 
+                                           'Co2', 'Co2_lower', 'Co2_upper')
+          st.plotly_chart(fig_modified, use_container_width=True)
+      
+      elif equation == "Renouv":
+          st.subheader("Prédictions pour Renouv")
+          fig_initial = plot_predictions(df_predictions_initial, "Prédictions Initiales - Renouv", 
+                                          'Renouv', 'Renouv_lower', 'Renouv_upper')
+          st.plotly_chart(fig_initial, use_container_width=True)
+      
+          fig_modified = plot_predictions(df_predictions_modified, "Prédictions Modifiées - Renouv", 
+                                           'Renouv', 'Renouv_lower', 'Renouv_upper')
+          st.plotly_chart(fig_modified, use_container_width=True)
 
   # Afficher l'impact
     st.subheader("Impact des prédictions")
