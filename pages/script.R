@@ -22,6 +22,7 @@ install_if_missing <- function(pkg) {
 
 # If you're using a specific library for the model, ensure it's loaded. For example:
 # library(randomForest)  # If the model is from randomForest
+library(systemfit)
 
 
 
