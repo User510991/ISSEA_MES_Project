@@ -28,7 +28,7 @@ install_if_missing <- function(pkg) {
 
 # Step 1: Download and load the model from the URL
 url <- "https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/Essaies/model_3sls.RData"  # Replace with actual URL of the model
-temp_model_file <- tempfile(fileext = ".rData")
+temp_model_file <- tempfile(fileext = ".RData")
 download.file(url, temp_model_file)
 model <- readRDS(temp_model_file)
 
