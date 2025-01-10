@@ -75,7 +75,7 @@ df = pd.read_csv(url,sep=";",decimal=",")
 df = df.set_index('Annee')
 df_new=df.iloc[-1:]
 last_index = df.index[-1]
-liste_exp=[l for l in df.columns if l not in ["PIB_hbt", "CO2","Renouv","Annee"]]
+liste_exp=[l for l in df.columns if l != "Annee" ]# if l not in ["PIB_hbt", "CO2","Renouv","Annee"]]
 prediction_period = st.sidebar.slider("Nombre de périodes pour la prédiction", 1, 20, 10)
 st.sidebar.subheader("Variables Explicatives")
 selected_vars = st.sidebar.multiselect("Sélectionnez les variables à modifier", liste_exp)
@@ -86,6 +86,7 @@ df_init=df_extended.iloc[-int(prediction_period):]
 a=1
 if selected_vars:
   for j in selected_vars:
+      st.subheader(j)
       # Demander combien de nombres l'utilisateur veut entrer
       num_entries = st.number_input("Sur combien d'années portent vos renseignement ?", min_value=0, max_value=int(prediction_period), value=0)
       # Liste pour stocker les nombres
@@ -103,11 +104,13 @@ if selected_vars:
           a=0
       
   df_new["log_Bext"]=np.log(-df_new["bal_ext_BS "])
+  df_new["log_PIB_hbt"]=np.log(-df_new["PIB_hbt"])
   df_new["log_fbcf"]=np.log(df_new["FBCF"])
   df_new["log_Irenouv"]=np.log(df_new["Imp_renouv"])
   df_init["log_Bext"] = np.log(-df_init["bal_ext_BS "])
   df_init["log_fbcf"] = np.log(df_init["FBCF"])
   df_init["log_Irenouv"] = np.log(df_init["Imp_renouv"])
+  df_init["log_PIB_hbt"]=np.log(df_init["PIB_hbt"])
   
   
   # Remplacement des NaN par la dernière valeur valide
