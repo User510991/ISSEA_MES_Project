@@ -186,7 +186,7 @@ if selected_vars:
     print(result)
     df_predictions_initial= pd.read_csv("predictions_initial.csv")
     df_predictions_modified = pd.read_csv("predictions_modified.csv")
-    df_impact = pd.read_csv("impact.csv")
+    #df_impact = pd.read_csv("impact.csv")
     
     # Exponentier log_pib_hab pour obtenir pib/hab
     df_predictions_initial['pib_hab'] = np.exp(df_predictions_initial['log_pib_hab'])
@@ -235,4 +235,7 @@ if selected_vars:
 
   # Afficher l'impact
     st.subheader("Impact des prédictions")
-    st.dataframe(df_impact)
+    st.dataframe(df_predictions_initial)
+    st.dataframe(df_predictions_modified)
+    df_i=df_predictions_modified-df_predictions_initial
+    st.dataframe(df_i)
