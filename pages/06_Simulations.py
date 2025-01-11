@@ -158,7 +158,7 @@ if selected_vars:
       df_filled=create_lag_column(df_filled, vari, i)
       df_init1=create_lag_column(df_init1, vari, i)
 
-  #col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
+  col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
   df_a=df_init1[col_names]#remove_column_spaces(df_init1[col_names])
   df_t=df_filled[col_names]#remove_column_spaces(df_filled[col_names])
   st.dataframe(df_t)
