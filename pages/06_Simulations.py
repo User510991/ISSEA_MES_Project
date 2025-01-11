@@ -132,7 +132,7 @@ if selected_vars:
   
   
   # Remplacement des NaN par la dernière valeur valide
-  col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
+  col_names=[i for i in df_new.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
   columns_tofill=[i for i in col_names if  i not in ["log_PIB_hbt","PIB_hbt", "CO2","Renouv"]]
   df_filled=df_new.copy()
   df_filled[columns_tofill] = df_new[columns_tofill].fillna(method='ffill')
