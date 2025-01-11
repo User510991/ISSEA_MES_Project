@@ -150,16 +150,16 @@ if selected_vars:
   df_filled[columns_tofill] = df_new[columns_tofill].fillna(method='ffill')
   df_init1=df_init.copy()
   df_init1[columns_tofill] = df_init[columns_tofill].fillna(method='ffill')
-  df_filled[["inflat","chom","co2","ef_ser","esp_vie"]]=df_filled[["Inflat","Chomage","CO2","effet_serre","Esp_vie"]]
-  df_init1[["inflat","chom","co2","ef_ser","esp_vie"]]=df_init1[["Inflat","Chomage","CO2","effet_serre","Esp_vie"]]
+  df_filled[["inflat","chom","co2","ef_ser","esp_vie","renouv"]]=df_filled[["Inflat","Chomage","CO2","effet_serre","Esp_vie","Renouv"]]
+  df_init1[["inflat","chom","co2","ef_ser","esp_vie","renouv"]]=df_init1[["Inflat","Chomage","CO2","effet_serre","Esp_vie","Renouv"]]
 
-  col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS ","Inflat","Chomage","CO2","effet_serre","Esp_vie"]]
+  col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS ","Inflat","Chomage","CO2","effet_serre","Esp_vie","Renouv"]]
   for vari in col_names:
     for i in range(1,6):
       df_filled=create_lag_column(df_filled, vari, i)
       df_init1=create_lag_column(df_init1, vari, i)
 
-  col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS ","Inflat","Chomage","CO2","effet_serre","Esp_vie"]]
+  col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS ","Inflat","Chomage","CO2","effet_serre","Esp_vie","Renouv"]]
   df_a=df_init1[col_names]#remove_column_spaces(df_init1[col_names])
   df_t=df_filled[col_names]#remove_column_spaces(df_filled[col_names])
   st.dataframe(df_t)
