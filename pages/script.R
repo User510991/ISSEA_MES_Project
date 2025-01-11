@@ -50,5 +50,5 @@ predictions_modified <- predict(modeleTCD, newdata = data_modified, interval = "
 # Step 7: Save modified predictions to a CSV file
 write.csv(predictions_modified, "predictions_modified.csv", row.names = FALSE)
 # 6. Calcul de l'impact (différence entre les prédictions initiales et modifiées)
-#impact <- predictions_modified - predictions_initial
-#write.csv(impact, "impact.csv", row.names = FALSE)
+impact <- predictions_modified - predictions_initial
+write.csv(impact, "impact.csv", row.names = FALSE)
