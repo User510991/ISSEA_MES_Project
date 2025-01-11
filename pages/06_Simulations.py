@@ -17,6 +17,24 @@ install.packages(c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS",
 
 # Exécuter le script R pour installer les packages
 #ro.r(install_r_packages)
+def create_lag_column(df, column_name, lag, new_column_name=None):
+    """
+    Crée une colonne retardée d'ordre `lag` à partir d'une colonne existante.
+    
+    Args:
+        df (pd.DataFrame): Le DataFrame d'entrée.
+        column_name (str): Le nom de la colonne à décaler.
+        lag (int): L'ordre du retard (nombre de lignes à décaler).
+        new_column_name (str, optional): Le nom de la nouvelle colonne. Si None, le nom sera généré automatiquement.
+    
+    Returns:
+        pd.DataFrame: Le DataFrame avec la nouvelle colonne ajoutée.
+    """
+    if new_column_name is None:
+        new_column_name = f"{column_name}{lag}"
+    
+    df[new_column_name] = df[column_name].shift(lag)
+    return df
 
 def plot_predictions(data, title, variable, confidence_lower, confidence_upper):
     fig = go.Figure()
@@ -114,9 +132,19 @@ if selected_vars:
   
   
   # Remplacement des NaN par la dernière valeur valide
-  df_filled = df_new.fillna(method='ffill')
   col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
-  df_a=df_init[col_names]
+  columns_tofill=[i for i in col_names if  i not in ["log_PIB_hbt","PIB_hbt", "CO2","Renouv"]]
+  df_filled=df_new.copy()
+  df_filled[columns_tofill] = df_new[columns_tofill].fillna(method='ffill')
+  df_init1=df_init.copy()
+  df_init1[columns_tofill] = df_init[columns_tofill].fillna(method='ffill')
+
+  for vari in df_filled.columns:
+    for i in range(1,6):
+      df_filled=create_lag_column(df_filled, vari, i)
+      df_init1=create_lag_column(df_init1, vari, i)
+  
+  df_a=df_init1[col_names]
   df_t=df_filled[col_names]
   df_t.to_csv('data_new.csv', index=True)
   df_a.to_csv('data_new_init.csv', index=True)
