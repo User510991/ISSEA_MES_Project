@@ -178,7 +178,7 @@ if selected_vars:
       result = subprocess.run(["Rscript", script_r], check=True, capture_output=True, text=True)
       st.success("Script R exécuté avec succès. Fichier CSV généré.")
       a=1
-      st.write(f"Fichier sauvegardé : {file_path}")
+      st.write(f"Fichiers sauvegardés")
   except subprocess.CalledProcessError as e:
       st.error(f"Erreur lors de l'exécution du script R : {e.stderr}")
       a=0
