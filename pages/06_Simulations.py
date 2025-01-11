@@ -112,7 +112,7 @@ selected_vars = st.sidebar.multiselect("Sélectionnez les variables à modifier"
 # Example usage
 # Add 3 rows with the same values as the last row of df
 df_extended = add_rows_with_tail_values(df, int(prediction_period))
-df_init=df_extended.iloc[-int(prediction_period):]
+df_init=df_extended#.iloc[-int(prediction_period):]
 a=1
 if selected_vars:
   for j in selected_vars:
