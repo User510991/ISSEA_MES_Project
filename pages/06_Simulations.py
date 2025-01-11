@@ -15,6 +15,18 @@ install.packages(c("moments", "urca", "readxl", "tseries", "ggplot2", "FinTS",
                    "xtable", "stargazer", "timeSeries", "Hmisc", "texreg", "forecast"))
 """
 
+def remove_column_spaces(df):
+    """
+    Enlève tous les espaces entourant les noms des colonnes d'un DataFrame.
+
+    Paramètre :
+    - df : pandas.DataFrame
+
+    Retourne :
+    - pandas.DataFrame avec les noms de colonnes nettoyés
+    """
+    df.columns = df.columns.str.strip()
+    return df
 # Exécuter le script R pour installer les packages
 #ro.r(install_r_packages)
 def create_lag_column(df, column_name, lag, new_column_name=None):
@@ -144,8 +156,9 @@ if selected_vars:
       df_filled=create_lag_column(df_filled, vari, i)
       df_init1=create_lag_column(df_init1, vari, i)
   col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
-  df_a=df_init1[col_names]
-  df_t=df_filled[col_names]
+  df_a=remove_column_spaces(df_init1[col_names])
+  df_t=remove_column_spaces(df_filled[col_names])
+  
   df_t.to_csv('data_new.csv', index=True)
   df_a.to_csv('data_new_init.csv', index=True)
   
