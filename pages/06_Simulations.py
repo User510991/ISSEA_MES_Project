@@ -97,7 +97,7 @@ def add_rows_with_tail_values(df, num_rows):
       return df
     
     tail_row = df.tail(1)
-    new_rows = pd.concat([tail_row] * num_rows)
+    new_rows = pd.concat([tail_row] * num_rows,ignore_index=True)
     return pd.concat([df, new_rows])
 
 url="https://raw.githubusercontent.com/User510991/ISSEA_MES_Project/refs/heads/main/Base_F2.csv"
