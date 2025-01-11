@@ -159,8 +159,8 @@ if selected_vars:
       df_init1=create_lag_column(df_init1, vari, i)
 
   #col_names=[i for i in df_filled.columns if i not in ["FBCF","Imp_renouv","bal_ext_BS "]]
-  df_a=remove_column_spaces(df_init1[col_names])
-  df_t=remove_column_spaces(df_filled[col_names])
+  df_a=df_init1[col_names]#remove_column_spaces(df_init1[col_names])
+  df_t=df_filled[col_names]#remove_column_spaces(df_filled[col_names])
   
   df_t.to_csv('data_new.csv', index=True)
   df_a.to_csv('data_new_init.csv', index=True)
