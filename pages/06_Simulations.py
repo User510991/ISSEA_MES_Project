@@ -25,7 +25,7 @@ def remove_column_spaces(df):
     Retourne :
     - pandas.DataFrame avec les noms de colonnes nettoyés
     """
-    df.columns = df.columns.str.strip().str.lower()
+    df.columns = df.columns.str.strip()
     return df
 # Exécuter le script R pour installer les packages
 #ro.r(install_r_packages)
