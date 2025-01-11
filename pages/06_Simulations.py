@@ -134,7 +134,7 @@ if selected_vars:
           a=0
       
   df_new["log_Bext"]=np.log(-df_new["bal_ext_BS "])
-  df_new["log_PIB_hbt"]=np.log(-df_new["PIB_hbt"])
+  df_new["log_PIB_hbt"]=np.log(df_new["PIB_hbt"])
   df_new["log_fbcf"]=np.log(df_new["FBCF"])
   df_new["log_Irenouv"]=np.log(df_new["Imp_renouv"])
   df_init["log_Bext"] = np.log(-df_init["bal_ext_BS "])
